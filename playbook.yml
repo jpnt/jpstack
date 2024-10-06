@@ -1,29 +1,29 @@
 ---
-- name: Install jpstack on Linux Distribution
+- name: Detect system distribution and apply corresponding setup
   hosts: local
   become: yes
   gather_facts: yes
 
   tasks:
-    - name: Set distro variable
+    - name: Determine system distribution
       set_fact:
         distro: "{{ ansible_distribution | lower | regex_replace(' ', '_') }}"
 
-    - name: Print distribution name
+    - name: Display system distribution
       debug:
         var: distro
 
-    - name: Check if distro role exists
+    - name: Verify if a setup role exists for the system distribution
       stat:
         path: "roles/{{ distro }}"
       register: distro_role
     
-    - name: Fail if distro role does not exist
+    - name: Abort if no role exists for the system distribtion
       fail:
         msg: "No role found for distribution: {{ distro }}"
       when: not distro_role.stat.exists
 
-    - name: Include distro role dynamically
+    - name: Include system-specific role dynamically
       include_role:
         name: "{{ distro }}"
 

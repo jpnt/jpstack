@@ -1,0 +1,9 @@
+---
+- name: Common -- Update package cache
+  ansible.builtin.package:
+    update_cache: yes
+
+- name: Common -- Upgrade all packages
+  ansible.builtin.package:
+    upgrade: yes
+    state: latest

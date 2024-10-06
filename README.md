@@ -3,7 +3,7 @@
 **jpstack** is a custom installer for a set of efficient userspace software.
 
 It is designed to streamline the installation process and configuration of essential
-tools across multiple Linux distributions.
+tools I use in my environment, across multiple Linux distributions.
 
 ## Philosophy
 
@@ -21,8 +21,9 @@ a set of cherry-picked quality software. What I call: "jpstack".
 - **Extensive Tooling**: Automates the installation of a variety of essential tools and
  applications.
 
-- **Cross-Distro Compatibility**: Designed to support both Arch Linux and Void Linux,
- allowing users to easily set up their environment on different systems.
+- **Cross-Distro Compatibility**: Designed to support a multiple of Linux distros,
+ allowing users to easily set up their environment on different systems. (Support for FreeBSD
+ is also planned).
   
 - **Declarative Configuration**: Utilizes **Ansible** as the automation tool to provide
  a clear and maintainable configuration structure.
@@ -33,7 +34,7 @@ a set of cherry-picked quality software. What I call: "jpstack".
 - **Modular Architecture**: Organized into roles and tasks, making it easy to manage and
  extend. Each role encapsulates a specific aspect of the installation process.
 
-- **Stage Selection**: Allows the user to select only the desired stage to run. Useful if
+- **Stage Selection**: Allows the user to select only the desired stages to run. Useful if
  OS is already installed in disk.
 
 ## Installation
@@ -56,11 +57,11 @@ https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.ht
 3. **Configure Inventory**
 
 ```
-Select the stages you want to run.
+Select the stages you want to run inside of inventory.ini.
 ```
 
 4. **Run the Playbook**
 
 ```sh
-ansible-playbook playbook.yml --ask-become-pass
+ansible-playbook playbook.yml -Kv
 ```

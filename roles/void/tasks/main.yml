@@ -1,87 +1,20 @@
 ---
-- name: Install jpstack on Void Linux
-  tasks:
-    - name: Stage 0 -- Prerequisites
-      include_tasks: stage_0_prerequisites.yml
-      when: "'stage_0' in stages_to_run.split(',')"
+- name: Stage 0 -- Prerequisites
+  include_tasks: stage_0_prerequisites.yml
+  when: "'stage_0' in stages_to_run.split(',')"
 
-    - name: Stage 1 -- Core System Setup
-      include_tasks: stage_1_core_system.yml
-      when: "'stage_1' in stages_to_run.split(',')"
-    
-    - name: Stage 2 -- Optimize Mirrors and Install Drivers
-      include_tasks: stage_2_optimize_and_drivers.yml
-      when: "'stage_2' in stages_to_run.split(',')"
+- name: Stage 1 -- Core System Setup
+  include_tasks: stage_1_core_system.yml
+  when: "'stage_1' in stages_to_run.split(',')"
 
-    - name: Stage 3 -- Disk Partitioning and Filesystems
-      include_tasks: stage_3_disk_partitioning.yml
-      when: "'stage_3' in stages_to_run.split(',')"
+- name: Stage 2 -- Optimize Mirrors and Install Drivers
+  include_tasks: stage_2_optimize_and_drivers.yml
+  when: "'stage_2' in stages_to_run.split(',')"
 
-    - name: Stage 4 -- Bootstrap and Final Configuration
-      include_tasks: stage_4_bootstrap_and_config.yml
-      when: "'stage_4' in stages_to_run.split(',')"
-      
-# - name: 00 -- Define prerequisites and package list
-#   set_fact:
-#     prerequisites:
-#       - gptfdisk
-#     packages:
-#       - fastfetch
-#       - grub
-#       - NetworkManager
-#     packages-nvidia:
-#       - nvidia
-#     packages-intel:
-#       - intel-gpu-tools
-#     packages-amd:
-#       - mesa
+- name: Stage 3 -- Disk Partitioning and Filesystems
+  include_tasks: stage_3_disk_partitioning.yml
+  when: "'stage_3' in stages_to_run.split(',')"
 
-# - name: 01 -- Update package cache
-#   community.general.xbps:
-#     update_cache: true
-
-# - name: 02 -- Upgrade packages
-#   community.general.xbps:
-#     upgrade: true
-
-# - name: 03 -- Identify environment
-
-# - name: 04 -- Optimize mirrors
-
-# - name: 05 -- Install packages
-#   community.general.xbps:
-#     name: "{{ item }}"
-#     state: present
-#   loop: "{{ packages }}"
-
-# - name: 06 -- Create partitions # TODO:00: enabled with a flag
-
-# - name: 07 -- Format disks # TODO:00 
-
-# - name: 08 -- Create filesystems
-
-# - name: 09 -- Generate fstab
-
-# - name: 10 -- Bootstrap
-
-# - name: 11 -- Install NetworkManager
-
-# - name: 12 -- Configure NetworkManager
-
-# - name: 13 -- Configure language
-
-# - name: 14 -- Installing nvidia packages
-
-# - name: 15 -- Installing intel packages
-
-# - name: 16 -- Installing amd packages
- 
-# - name: Install dotfiles
-
-# - name: Install custom software
-
-# - name: Compile software
-
-# - name: Enable daemons
-
-# - name: Configure NetworkManager
+- name: Stage 4 -- Bootstrap and Final Configuration
+  include_tasks: stage_4_bootstrap_and_config.yml
+  when: "'stage_4' in stages_to_run.split(',')"
