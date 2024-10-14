@@ -45,7 +45,7 @@ Linux is not the problem -- it is the poorly configured userspace environments t
 
 1. **Clone the Repository**:
 ```sh
-git clone https://github.com/yourusername/jpstack.git
+git clone https://github.com/jpnt/jpstack.git
 cd jpstack
 ```
 
