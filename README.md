@@ -1,67 +1,66 @@
 # jpstack
 
-**jpstack** is a custom installer for a set of efficient userspace software.
-
-It is designed to streamline the installation process and configuration of essential
-tools I use in my environment, across multiple Linux distributions.
+**jpstack** is an opinionated, minimalistic custom installer for efficient userspace software. It automates the setup of a carefully curated selection of tools and configurations, streamlining the installation process across various Linux distributions.
 
 ## Philosophy
 
-99% of Linux problems are not Linux problems but userspace problems; Poorly configured
-and bloated userspace software environments lead to the majority of the problems and inconsistencies.
+Linux is not the problem -- it is the poorly configured userspace environments that lead to inconsistencies and inefficiencies. **jpstack** solves this by delivering a reproducible, distro-agnostic setup with cherry-picked minimalist software and sane configuration defaults, ensuring a reliable and optimized system every time and avoiding the clutter of unnecessary packages.
 
-Configuring a set of quality software is time consuming, even if you know what you are
-doing, you will eventually forget some things.
+## Core Components
 
-My solution to this problem is to create a distro-agnostic reproducible environment with
-a set of cherry-picked quality software. What I call: "jpstack".
+- **jpwm**: A custom window manager designed for simplicity, robustness and speed.
+
+- **jpte**: A terminal emulator built with minimalism in mind, prepared for the 21st century.
+
+- **Colletion of *suckless* software**: Integration of lightweight tools such as `imv`, `bgs`,
+  `vim`, `dmenu`, etc.
+
+- **Dotfiles**: Configuration files that customize some userspace tools I use,
+  such as `vim`, `gdb`, `ksh`, `bash` and a collection of scripts.
+
+## Opionated System Configuration
+
+### Networking
+
+- **NetworkManager**: Standardized across distros for seamless network management.
+
+- **Bridge Networking**: Configured to use a master-slave network interface paradigm.
+    - **Bridge Master**: All network interfaces are configured to pass through a
+      bridge master, providing complete Layer 2 communication.
+    - **Virtual Machines**: This configuration allows VM interfaces to communicate 
+      without NAT, using real IP addresses for direct access.
 
 ## Features
 
-- **Extensive Tooling**: Automates the installation of a variety of essential tools and
- applications.
+- **Cross-Distro Compatibility**: Works with multiple Linux distributions, so you
+  can set up your environment no matter what system you’re running.
 
-- **Cross-Distro Compatibility**: Designed to support a multiple of Linux distros,
- allowing users to easily set up their environment on different systems. (Support for FreeBSD
- is also planned).
-  
-- **Declarative Configuration**: Utilizes **Ansible** as the automation tool to provide
- a clear and maintainable configuration structure.
+- **Idempotent Configuration**: Re-running jpstack doesn’t change anything already
+  configured; it will only make the required updates.
 
-- **Idempotent Operations**: Ensures that repeated executions of the installation process
- do not alter the system's state if it is already in the desired configuration.
-
-- **Modular Architecture**: Organized into roles and tasks, making it easy to manage and
- extend. Each role encapsulates a specific aspect of the installation process.
-
-- **Stage Selection**: Allows the user to select only the desired stages to run. Useful if
- OS is already installed in disk.
+- **Modular Architecture**: Organized into stages, allowing you to select which 
+  parts of the system to configure.
 
 ## Installation
 
-To get started with jpstack, follow these steps:
-
 1. **Clone the Repository**:
-
 ```sh
 git clone https://github.com/yourusername/jpstack.git
 cd jpstack
 ```
 
 2. **Install Ansible**
-
-```
-https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
-```
+Follow [Ansible's official installation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) guide to get started.
 
 3. **Configure Inventory**
 
-```
-Select the stages you want to run inside of inventory.ini.
+Edit inventory.ini to specify which stages of installation you want to run.
+```ini
+[local:vars]
+stages_to_run=stage_0,stage_1,stage_2,stage_3,stage_4
 ```
 
 4. **Run the Playbook**
-
 ```sh
 ansible-playbook playbook.yml -Kv
 ```
